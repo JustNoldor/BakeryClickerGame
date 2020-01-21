@@ -7,12 +7,11 @@ import Game from './game';
 class App extends React.Component{
 constructor(props){
   super(props);
-  this.state={
-  }
+  this.state={}
   this.game= new Game()
 }
 
-//Call update every 40 millisecond
+//Call update every 100 millisecond
 componentDidMount(){
   setInterval(()=> {
     this.game.update();
@@ -31,9 +30,9 @@ this.game.update();
           BAKERY
         </header>
         <div style={{marginBottom: '12px'}}>
-          Bread : {this.game.currentBread} <br/>
+          Bread : {this.game.manufacturedBread} <br/>
           <button disabled={!this.game.canMakeBread()}
-          onClick={this.game.makeBread}> Make Bread </button>
+          onClick={() => this.game.makeBread()}> Make Bread </button>
         </div>
         <div>
           Business

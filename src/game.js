@@ -20,21 +20,36 @@ class Game{
     //generators
     autoGenerators={
         apprentice: 0,
-        apprenticeCost: 100,
+        apprenticeCost: 1000,
+        apprenticeManufacturedRate:1,
         foreman: 0,
-        foremanCost:200,
+        foremanCost:5000,
+        foremanManufacturedRate:6,
         master: 0,
-        masterCost:500,
-    }
+        masterCost:20000,
+        masterManufacturedRate:15
+    };
+    autoGeneratorsLastGeneratedAt =  Date.now();
     
 
-    makeBread = () => {
-        this.currentBread++;
-        this.manufacturedBread++;
-        this.material-=this.unitMaterialCost;
+    makeBread = (count=1) => {
+        if (this.canMakeBread(count)) {
+            this.currentBread+= count;
+            this.manufacturedBread+= count;
+            this.material-= this.unitMaterialCost *  count;    
+        }
+
     };
 
     update = () => {
+        //generate new goods
+        if (Date.now() - this.autoGeneratorsLastGeneratedAt > 1000) {
+        this.makeBread(this.autoGenerators.apprentice * this.autoGenerators.apprenticeManufacturedRate);
+        this.makeBread(this.autoGenerators.foreman * this.autoGenerators.foremanManufacturedRate);
+        this.makeBread(this.autoGenerators.master * this.autoGenerators.masterManufacturedRate);
+        this.autoGeneratorsLastGeneratedAt = Date.now();
+        }
+
         //update material cost
         if (Date.now() - this.materialCostLastUpdated>10000) {
             this.materialCost =  Math.floor(Math.random() * 300 + 300);
@@ -82,8 +97,8 @@ class Game{
         }
     }
 
-    canMakeBread = () => {
-        return this.material>= this.materialCost;
+    canMakeBread = (count = 1) => {
+        return this.material>= this.materialCost * count;
     };
 
     canBuyMaterial = () => {
@@ -95,6 +110,9 @@ class Game{
     };
 
     buyMaterial = () => {
+        if (!this.canBuyMaterial()) {
+            return;
+        }
         this.materialCost +=Math.floor(Math.random() * 20 + 10);
         this.materialCostLastUpdated=Date.now();
 
