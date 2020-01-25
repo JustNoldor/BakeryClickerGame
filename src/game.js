@@ -35,7 +35,7 @@ class Game{
     //auto buyer
     hasAutoBuyer= false;
     isAutoBuyerActive=false;
-    autoBuyerCost=100;
+    autoBuyerCost=10000;
 
 
     canBuyAutoBuyer = () => {
