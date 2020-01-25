@@ -32,6 +32,26 @@ class Game{
     autoGeneratorsLastGeneratedAt =  Date.now();
     
 
+    //auto buyer
+    hasAutoBuyer= false;
+    isAutoBuyerActive=false;
+    autoBuyerCost=100;
+
+
+    canBuyAutoBuyer = () => {
+        return this.money >= this.autoBuyerCost && this.hasAutoBuyer==false ;
+    };
+
+    buyAutoBuyer = () =>{
+        if (!this.canBuyAutoBuyer()){
+            return;
+        }
+        this.money-=this.autoBuyerCost;
+        this.hasAutoBuyer=true;
+        this.isAutoBuyerActive=true;
+    };
+
+
     makeBread = (count=1) => {
         if (this.canMakeBread(count)) {
             this.currentBread+= count;
@@ -48,6 +68,11 @@ class Game{
         this.makeBread(this.autoGenerators.foreman * this.autoGenerators.foremanManufacturedRate);
         this.makeBread(this.autoGenerators.master * this.autoGenerators.masterManufacturedRate);
         this.autoGeneratorsLastGeneratedAt = Date.now();
+        }
+
+        //auto buyer
+        if (this.isAutoBuyerActive && this.material<2000 && this.canBuyMaterial()){
+            this.buyMaterial();
         }
 
         //update material cost

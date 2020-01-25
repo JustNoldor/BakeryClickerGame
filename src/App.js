@@ -75,6 +75,13 @@ this.game.update();
             onClick={this.game.buyMaterial}> Buy Material ({this.game.materialCost}$) </button>
             </td>
           </tr>
+          <tr>
+          <td> Store Manager  : </td>
+          <td> {this.game.isAutoBuyerActive ? "Enabled":"Disabled"}
+          <button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoBuyer()} 
+          onClick={this.game.buyAutoBuyer}> Buy Manager ({this.game.autoBuyerCost}$) </button>
+          </td>
+        </tr>
           <div style={{marginTop: "20px"}}> 
           Workers </div>
           <hr />
