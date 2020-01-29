@@ -58,6 +58,13 @@ this.game.update();
               <td>Supply/Demand : </td>
               <td>%{this.game.demandRate} </td>
             </tr>
+            <tr>
+            <td>Bank : (Interest: %{this.game.loanRate}) </td>
+            <td>
+            <button disabled={!this.game.canTakeLoan()} onClick={this.game.takeLoan} >Take Loan {this.game.loanMoney}</button>
+            <button disabled={!this.game.canRepayLoan()} style={{marginLeft: "10px"}} onClick={this.game.repayLoan}> Repay Loan {this.game.repayLoanMoney}</button>
+            </td>
+          </tr>
             </table>
           </div>
           <div style={{marginTop: "20px"}}> 

@@ -33,13 +33,37 @@ class Game{
     
 
     //auto buyer
-    hasAutoBuyer= false;
+    hasAutoBuyer=false;
     isAutoBuyerActive=false;
     autoBuyerCost=10000;
 
+    //bank
+    loanCount=0;
+    loanMoney=5000;
+    loanRate=8;
+    repayLoanMoney = this.loanMoney + ((this.loanMoney/100)*this.loanRate); 
+
+    canTakeLoan = () => {
+        return this.loanCount<1;
+    };
+
+    takeLoan = () => {
+        this.loanCount+=1;
+        this.money+=this.loanMoney;
+        this.loanRate+=Math.floor(Math.random() * 10);
+    };
+
+    canRepayLoan = () => {
+        return this.money >= this.repayLoanMoney;
+    };
+
+    repayLoan = () => {
+        this.loanCount-=1;
+        this.money-=this.repayLoanMoney;
+    };
 
     canBuyAutoBuyer = () => {
-        return this.money >= this.autoBuyerCost && this.hasAutoBuyer==false ;
+        return this.money >= this.autoBuyerCost && this.hasAutoBuyer===false ;
     };
 
     buyAutoBuyer = () =>{
