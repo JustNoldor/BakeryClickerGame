@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Game from './game';
+import Button from './button';
 
 
 
@@ -31,8 +32,8 @@ this.game.update();
         </header>
         <div style={{marginBottom: '12px'}}>
           Bread : {this.game.manufacturedBread} <br/>
-          <button disabled={!this.game.canMakeBread()}
-          onClick={() => this.game.makeBread()}> Make Bread </button>
+          <Button disabled={!this.game.canMakeBread()} onClick={() => this.game.makeBread()} 
+          value={"Make Bread"}/>
         </div>
         <div>
           Business
@@ -52,8 +53,11 @@ this.game.update();
             <tr>
               <td>Price : </td>
               {this.game.price} $
-              <button style={{marginLeft: "20px"}} onClick={this.game.increasePrice}> + </button>
-              <button style={{marginLeft: "10px"}} disabled={!this.game.canDecreasePrice()} onClick={this.game.decreasePrice}> - </button>            </tr>
+              <Button style={{marginLeft: "20px"}} onClick={this.game.increasePrice} 
+              value={"+"} />
+              <Button style={{marginLeft: "10px"}} disabled={!this.game.canDecreasePrice()} onClick={this.game.decreasePrice} 
+              value={"-"}/>
+            </tr>
             <tr>
               <td>Supply/Demand : </td>
               <td>%{this.game.demandRate} </td>
@@ -61,8 +65,10 @@ this.game.update();
             <tr>
             <td>Bank : (Interest: %{this.game.loanRate}) </td>
             <td>
-            <button disabled={!this.game.canTakeLoan()} onClick={this.game.takeLoan} >Take Loan {this.game.loanMoney}</button>
-            <button disabled={!this.game.canRepayLoan()} style={{marginLeft: "10px"}} onClick={this.game.repayLoan}> Repay Loan {this.game.repayLoanMoney}</button>
+            <Button disabled={!this.game.canTakeLoan()} onClick={this.game.takeLoan} 
+            value={`Take Loan ${this.game.loanMoney}$`} />
+            <Button disabled={!this.game.canRepayLoan()} onClick={this.game.repayLoan} 
+            value={`Repay Loan ${this.game.repayLoanMoney}$`} />
             </td>
           </tr>
             </table>
@@ -78,15 +84,15 @@ this.game.update();
           <tr>
             <td> Material  : </td>
             <td> {this.game.material} gr
-            <button style={{marginLeft: "10px"}} disabled={!this.game.canBuyMaterial()} 
-            onClick={this.game.buyMaterial}> Buy Material ({this.game.materialCost}$) </button>
+            <Button style={{marginLeft: "10px"}} disabled={!this.game.canBuyMaterial()} onClick={this.game.buyMaterial} 
+            value={`Buy Material ${this.game.materialCost}$`} />
             </td>
           </tr>
           <tr>
           <td> Store Manager  : </td>
           <td> {this.game.isAutoBuyerActive ? "Enabled":"Disabled"}
-          <button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoBuyer()} 
-          onClick={this.game.buyAutoBuyer}> Buy Manager ({this.game.autoBuyerCost}$) </button>
+          <Button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoBuyer()} onClick={this.game.buyAutoBuyer} 
+          value={`Buy Manager ${this.game.autoBuyerCost}$`} />
           </td>
         </tr>
           <div style={{marginTop: "20px"}}> 
@@ -95,25 +101,22 @@ this.game.update();
           <tr>
           <td>Baker's Apprentice</td>
           <td>{this.game.autoGenerators.apprentice}
-          <button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoGenerator("APPRENTICE")} 
-          onClick={() => this.game.buyAutoGenerator("APPRENTICE")}> 
-          Buy ({this.game.autoGenerators.apprenticeCost}$) </button>
+          <Button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoGenerator("APPRENTICE")} onClick={() => this.game.buyAutoGenerator("APPRENTICE")}
+          value={`Buy ${this.game.autoGenerators.apprenticeCost}$`} />
           </td>
           </tr>
           <tr>
           <td>Baker's Foreman</td>
           <td>{this.game.autoGenerators.foreman}
-          <button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoGenerator("FOREMAN")} 
-          onClick={() => this.game.buyAutoGenerator("FOREMAN")}> 
-          Buy ({this.game.autoGenerators.foremanCost}$) </button>
+          <Button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoGenerator("FOREMAN")} onClick={() => this.game.buyAutoGenerator("FOREMAN")}
+          value={`Buy ${this.game.autoGenerators.foremanCost}$`} />
           </td>
           </tr>
           <tr>
           <td>Baker's Master</td>
           <td>{this.game.autoGenerators.master}
-          <button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoGenerator("MASTER")} 
-          onClick={() => this.game.buyAutoGenerator("MASTER")}> 
-          Buy ({this.game.autoGenerators.masterCost}$) </button>
+          <Button style={{marginLeft: "10px"}} disabled={!this.game.canBuyAutoGenerator("MASTER")} onClick={() => this.game.buyAutoGenerator("MASTER")}
+          value={`Buy ${this.game.autoGenerators.masterCost}$`} />
           </td>
           </tr>
           </table>
